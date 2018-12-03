@@ -1,0 +1,54 @@
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<div style="margin-left: 20px">
+    <div style="margin-top: 12px; margin-bottom: 15px"><h2>{{title}}</h2></div>
+    <form id="form" on>
+        Language:<br>
+        <input type="text" name="language"><br><br>
+        Rating (on a scale of 1 to 5):<br>
+        <input type="text" name="rating"><br><br>
+        Comments:<br>
+        <input type="text" name="comments"><br><br>
+        Duolingo Experience Level (1 to 25):<br>
+        <input type="text" name="experience"><br><br>
+        Duolingo Username:<br>
+        <input type="text" name="username"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+<script>
+    $('#form').on('submit', function(event) {
+        event.preventDefault();
+        var values = [];
+        var obj = {};
+        $('input').each(function() {
+            if ($(this).val() !== "Submit") {
+                values.push($(this).val());
+            }
+        });
+        console.log(values);
+        obj['language'] = values[1];
+        obj['rating'] = values[2];
+        obj['comment'] = values[3];
+        obj['experience_level'] = values[4];
+        obj['duolingo_username'] = values[5];
+        console.log(obj);
+        document.getElementById("form").reset();
+        $.ajax({
+            type: "POST",
+            url: "/api/review",
+            data: obj,
+            success: function() {
+                console.log('success');
+            }
+        });
+    });
+</script>
+
+
+<!--{-->
+<!--language: 'French',-->
+<!--rating: 3,-->
+<!--comment: 'Great for learning vocab and reading French, but needs more listening comprehension practice',-->
+<!--experience_level: 12,-->
+<!--duolingo_username: 'user123'-->
+<!--}-->

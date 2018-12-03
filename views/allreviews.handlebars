@@ -1,0 +1,27 @@
+<div id="title" style="margin-left: 20px; margin-bottom: 20px; margin-top: 15px">
+    <h2>{{{title}}}</h2>
+</div>
+
+<div id="no-matches" style="margin-left: 20px;"></div>
+
+<div id="cards" style="margin-left: 20px">
+    {{#each all_reviews}}
+        <div id="card" class="card bg-light mb-3" style="max-width: 22rem;">
+            <div class="card-header">
+                {{#times this.rating}}
+                    <i class="fa fa-star"></i>
+                {{/times}}
+            </div>
+            <div class="card-body">
+                <h5 id="title" class="card-title">{{this.language}}</h5>
+                <h6 style="color: gray">by {{this.duolingo_username}} | level {{this.experience_level}} </h6>
+                <p>{{this.comment}}</p>
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+<script>
+    localStorage.cards = document.getElementsByClassName("card bg-light mb-3");
+</script>
+
